@@ -143,7 +143,7 @@ app.post('/checkin', function(req, res) {
 // Test secret key: sk_test_w3e7ceV8H7W58BRqHnyv8rxz
 var STRIPE_TOKEN_URI = "https://connect.stripe.com/oauth/token"
 var STRIPE_CLIENT_ID = "ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo"
-var STRIPE_CLIENT_SECRET = "sk_test_3dz9AqNJBdYjfSf4DlqasUAC"
+var STRIPE_CLIENT_SECRET = "pk_test_JKdI5RMl6j8G0v5oARcNdKCj"
 var STRIPE_TEST_DESTINATION = "cus_9QNfmWnoHlLo4Y"
 
 app.get('/stripeURI', function(req, res) {
