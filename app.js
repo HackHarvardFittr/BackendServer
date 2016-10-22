@@ -40,7 +40,6 @@ app.post('/upload', function(req, res) {
 })
 
 app.post('/submitprofile', function(req, res) {
-	res.send("Received request")
 	var data = req.body
 	var address = data.gymAddress
 	address.split(' ').join('+')
