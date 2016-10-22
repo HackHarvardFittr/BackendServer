@@ -8,7 +8,7 @@ var fs = require('fs')
 var bodyParser = require('body-parser')
 var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
-var googleMapsAPIKey = "&key=AIzaSyDK_CydX-pzV5HcHLNJPYV4JGdqBnoM7sM" 
+var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
 
 app.use(bodyParser.json({limit: '200mb'}))
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true}))
@@ -42,6 +42,7 @@ app.post('/upload', function(req, res) {
 app.post('/submitprofile', function(req, res) {
 	var data = req.body
 	console.log(data)
+	res.send("Received request")
 })
 
 app.listen(4900)
