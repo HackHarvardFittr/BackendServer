@@ -40,6 +40,7 @@ app.post('/submitprofile', function(req, res) {
 	address.split(' ').join('+')
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
+		console.log(typeof body)
 		var response = JSON.parse(body)
 		console.log(response.results.geometry)
 	})	
