@@ -36,7 +36,7 @@ app.post('/upload', function(req, res) {
 
 app.post('/submitprofile', function(req, res) {
 	var data = req.body
-	var address = req.body.gymAddress
+	var address = "317 Valeria Blvd, Vaughan, ON"
 	address.split(' ').join('+')
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
