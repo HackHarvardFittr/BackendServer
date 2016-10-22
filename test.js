@@ -1,6 +1,7 @@
 var express = require('express')
 var app = express()
 var mongoose  = require('mongoose')
+var cloudinary = require('cloudinary')
 
 app.get('/', function(req, res) {
 	console.log('request received')
