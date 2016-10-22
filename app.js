@@ -93,7 +93,7 @@ app.post('/submitprofile', function(req, res) {
 	})
 })
 
-app.post('/checkin' function(req, res) {
+app.post('/checkin', function(req, res) {
 	var lat = parseFloat(req.body.latitude)
 	var lon = parseFloat(req.body.longitude)
 	var lat2 = 0
