@@ -169,8 +169,8 @@ app.get('/stripeURI', function(req, res) {
 		stripe.charges.create({
 			amount: 5,
 			currency: 'cad',
-			source: {accessToken}
-		}, { stripe_account: {STRIPE_TEST_DESTINATION} })
+			source: accessToken
+		}, { stripe_account: STRIPE_TEST_DESTINATION })
 		res.send(accessToken)
 	})
 })
