@@ -101,7 +101,7 @@ app.post('/checkin', function(req, res) {
 	var distance = 99999
 	var checkinValid = false
 	userid = req.body.userid
-	Users.findById(userid).exec(function(err, user) {
+	User.findById(userid).exec(function(err, user) {
 		if (err) {
 			res.send("Error: User not found!")
 		}
@@ -126,6 +126,19 @@ app.post('/checkin', function(req, res) {
 			}
 			res.send(true)
 		}
+	})
+})
+
+app.post('/populate', function(req, res) {
+	var lat1 = parseFloat(req.body.latitude)
+	var lon1 = parseFloat(req.body.longitude)
+	var lat2 = 0 
+	var lon2 = 0
+
+	var distance = 9999
+	userid = req.body.userid
+	Users.findById(userid).exec(function(err, user) {
+		if (err) res.send("Error: User not found!")	
 	})
 })
 

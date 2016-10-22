@@ -12,7 +12,8 @@ var UserSchema = new mongoose.Schema({
 	hasPartner: { type: Boolean, default: false },
 	partner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	likers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-	dailyPoints: { type: Number, default: 0 }
+	dailyPoints: { type: Number, default: 0 },
+	dailySteps: { type: Number, default: 0 }  
 })
 
 var User = mongoose.model('User', UserSchema)
