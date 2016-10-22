@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/HackHarvardFittr/BackendServer/issues"
   },
-  "homepage": "https://github.com/HackHarvardFittr/BackendServer#readme"
+  "homepage": "https://github.com/HackHarvardFittr/BackendServer#readme",
+  "dependencies": {
+    "cloudinary": "^1.4.3",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.4",
+    "multer": "^1.2.0"
+  },
+  "devDependencies": {}
 }
