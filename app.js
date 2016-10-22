@@ -73,8 +73,8 @@ app.post('/submitprofile', function(req, res) {
 			console.log(err)
 			res.send(err)
 		} else {
-			console.log(new._id)
-			res.send(new._id)
+			console.log(user._id)
+			res.send(user._id)
 		}
 	})
 })
