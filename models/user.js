@@ -15,7 +15,8 @@ var UserSchema = new mongoose.Schema({
 	dailyPoints: { type: Number, default: 0 },
 	dailySteps: { type: Number, default: 0 },
 	stripeUserId: String,
-	stripeAccessToken: String  
+	stripeAccessToken: String,
+	goneToday: { type: Boolean, default: false }  
 })
 
 var User = mongoose.model('User', UserSchema)

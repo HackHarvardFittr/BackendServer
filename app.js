@@ -117,21 +117,22 @@ app.post('/checkin', function(req, res) {
 			lon2 = user.longitude
 		}
 		distance = euclideanDistance(lat, lon, lat2, lon2)
-		if (distance < 1.1) {
+		if (distance < 2) {
 			checkinValid = true
 		}
 		if (!checkinValid) {
-			res.send(false)
+			res.send("false")
 		}
 		else {
 			// Now we compare the dates 
 			today = new Date()
 			if (today > user.checkinDate) {
 				user.checkinDate = today
+				user.goneToday = true
 				user.dailyPoints += 10
 				user.save()
 			}
-			res.send(true)
+			res.send("true")
 		}
 	})
 })
