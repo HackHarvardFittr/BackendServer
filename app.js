@@ -156,7 +156,7 @@ app.get('/stripeURI', function(req, res) {
 			code: auth_code,
 			client_secret: "sk_test_w3e7ceV8H7W58BRqHnyv8rxz"
 		}
-	}, function(err, res, body) {
+	}, function(err, response, body) {
 		var accessToken = JSON.parse(body).access_token
 
 		console.log(accessToken)
