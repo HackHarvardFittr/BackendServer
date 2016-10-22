@@ -40,7 +40,8 @@ app.post('/submitprofile', function(req, res) {
 	address.split(' ').join('+')
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
-		console.log(body.results)
+		console.log(body)
+		console.log(res.statusCode)
 	})	
 	console.log(data)
 	res.send("Received request")
