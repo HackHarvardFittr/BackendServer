@@ -11,6 +11,7 @@ var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
 var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
 
+
 app.use(bodyParser.json({limit: '200mb'}))
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true}))
 app.get('/', function(req, res) {
@@ -129,6 +130,43 @@ app.post('/checkin', function(req, res) {
 	})
 })
 
+// Stripe Client ID: ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo
+// Redirect URI Stripe: http://35.161.109.99:4900/stripeURI
+
+// Link for the 'Connect' button: https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo&scope=read_write
+// Test secret key: sk_test_w3e7ceV8H7W58BRqHnyv8rxz
+var STRIPE_TOKEN_URI = "https://connect.stripe.com/oauth/token"
+var STRIPE_CLIENT_ID = "ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo"
+var STRIPE_CLIENT_SECRET = "sk_test_w3e7ceV8H7W58BRqHnyv8rxz"
+
+app.get('/stripeURI', function(req, res) {
+	var auth_code = req.query.code
+
+	if (req.query.eror) {
+		res.send("Error: The client denied access to the app")
+	}
+
+	// If the flow reaches this stage, we know that we have the auth_code
+
+	request.post({
+		url: STRIPE_TOKEN_URI,
+		form: {
+			grant_type: "authorization_code",
+			client_id: STRIPE_CLIENT_ID,
+			code: auth_code,
+			client_secret: "sk_test_w3e7ceV8H7W58BRqHnyv8rxz"
+		}
+	}, function(err, res, body) {
+		var accessToken = JSON.parse(body).access_token
+
+		console.log(accessToken)
+		console.log(JSON.parse(body))
+		res.send(accessToken)
+	})
+})
+
+
+// TODO
 app.post('/populate', function(req, res) {
 	var lat1 = parseFloat(req.body.latitude)
 	var lon1 = parseFloat(req.body.longitude)
