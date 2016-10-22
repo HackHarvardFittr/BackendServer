@@ -16,11 +16,13 @@ app.get('/', function(req, res) {
 	console.log('request received')
 	res.send('GET request received')
 })
+
 cloudinary.config({ 
   	cloud_name: 'aayushshah', 
   	api_key: '736295731869694', 
   	api_secret: 'TpBrLwl_nATkBZQSzws94mtS9fA' 
-});
+})
+
 app.post('/upload', function(req, res) {
 	var img = req.body.image
 	var buf = new Buffer(img, 'base64')
@@ -35,6 +37,11 @@ app.post('/upload', function(req, res) {
 	request(APIcall, function(err, res, body) {
 		console.log(body.results.geometry.location)
 	})
+})
+
+app.post('/submitprofile', function(req, res) {
+	var data = req.body
+	console.log(data)
 })
 
 app.listen(4900)
