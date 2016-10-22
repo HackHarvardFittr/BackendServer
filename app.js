@@ -33,7 +33,7 @@ app.post('/upload', function(req, res) {
 	address.split(' ').join('+')
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
-		console.log(body)
+		console.log(body.results.geometry.location)
 	})
 })
 
