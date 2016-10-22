@@ -10,7 +10,7 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
 var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
-var stripe = require('stripe')("sk_test_3dz9AqNJBdYjfSf4DlqasUAC")
+var stripe = require('stripe')("pk_test_JKdI5RMl6j8G0v5oARcNdKCj")
 
 
 app.use(bodyParser.json({limit: '200mb'}))
@@ -101,6 +101,8 @@ app.post('/submitprofile', function(req, res) {
 app.post('/checkin', function(req, res) {
 	var lat = parseFloat(req.body.latitude)
 	var lon = parseFloat(req.body.longitude)
+	console.log(lat)
+	console.log(lon)
 	var lat2 = 0
 	var lon2 = 0
 	var distance = 99999
@@ -158,7 +160,7 @@ app.get('/stripeURI', function(req, res) {
 			grant_type: "authorization_code",
 			client_id: STRIPE_CLIENT_ID,
 			code: auth_code,
-			client_secret: "sk_test_w3e7ceV8H7W58BRqHnyv8rxz"
+			client_secret: STRIPE_CLIENT_SECRET
 		}
 	}, function(err, response, body) {
 		var accessToken = JSON.parse(body).access_token
