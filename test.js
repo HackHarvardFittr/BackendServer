@@ -7,8 +7,8 @@ var cloudinary = require('cloudinary')
 var fs = require('fs')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}))
-
-
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 app.get('/', function(req, res) {
 	console.log('request received')
