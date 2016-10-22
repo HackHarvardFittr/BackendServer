@@ -10,7 +10,7 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
 var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
-var stripe = require('stripe')
+var stripe = require('stripe')("sk_test_w3e7ceV8H7W58BRqHnyv8rxz")
 
 
 app.use(bodyParser.json({limit: '200mb'}))
