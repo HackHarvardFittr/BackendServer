@@ -10,8 +10,8 @@ app.get('/', function(req, res) {
 	res.send('This works!')
 })
 
-app.post('/upload', upload.array('file', 12), function(req, res) {
-	console.log(req.files)
+app.post('/upload', upload.single('image'), function(req, res) {
+	console.log(req)
 	res.send("done")
 })
 
