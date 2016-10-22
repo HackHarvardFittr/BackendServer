@@ -93,7 +93,7 @@ app.post('/submitprofile', function(req, res) {
 		} else {
 			console.log(user._id)
 			CURRENT_USER_ID = user._id
-			res.send(user._id)
+			res.send(String(user._id))
 		}
 	})
 })
