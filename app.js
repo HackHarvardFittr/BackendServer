@@ -47,11 +47,8 @@ app.post('/submitprofile', function(req, res) {
 	var longitude = 0
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
-		console.log(typeof body)
 		var response = JSON.parse(body)
-		console.log("Latitude: " + response["results"][0]["geometry"]["location"]["lat"])
 		latitude = parseFloat(response["results"][0]["geometry"]["location"]["lat"])
-		console.log("Longitude: " + response["results"][0]["geometry"]["location"]["lng"])
 		longitude = parseFloat(response["results"][0]["geometry"]["location"]["lng"])
 	})	
 	var gymAddress = data.gymAddress
