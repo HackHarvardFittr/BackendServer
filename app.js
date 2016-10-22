@@ -20,11 +20,29 @@ app.get('/', function(req, res) {
 
 mongoose.connect("mongodb://localhost:27017/fittr")
 
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180
+  }
+}
+
 cloudinary.config({ 
   	cloud_name: 'aayushshah', 
   	api_key: '736295731869694', 
   	api_secret: 'TpBrLwl_nATkBZQSzws94mtS9fA' 
 })
+
+var euclideanDistance = function(lat1, lon1, lat2, lon2) {
+	var R = 6371; // Radius of the earth in km
+	var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
+	var dLon = (lon2-lon1).toRad(); 
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+	        Math.sin(dLon/2) * Math.sin(dLon/2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c; // Distance in km
+	return d
+}
 
 var imageURL = ""
 
@@ -71,6 +89,42 @@ app.post('/submitprofile', function(req, res) {
 		} else {
 			console.log(user._id)
 			res.send(user._id)
+		}
+	})
+})
+
+app.post('/checkin' function(req, res) {
+	var lat = parseFloat(req.body.latitude)
+	var lon = parseFloat(req.body.longitude)
+	var lat2 = 0
+	var lon2 = 0
+	var distance = 99999
+	var checkinValid = false
+	userid = req.body.userid
+	Users.findById(userid).exec(function(err, user) {
+		if (err) {
+			res.send("Error: User not found!")
+		}
+		else {
+			lat2 = user.latitude
+			lon2 = user.longitude
+		}
+		distance = euclideanDistance(lat, lon, lat2, lon2)
+		if (distance < 1.1) {
+			checkinValid = true
+		}
+		if (!checkinValid) {
+			res.send(false)
+		}
+		else {
+			// Now we compare the dates 
+			today = new Date()
+			if (today > user.checkinDate) {
+				user.checkinDate = today
+				user.dailyPoints += 10
+				user.save()
+			}
+			res.send(true)
 		}
 	})
 })
