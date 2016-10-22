@@ -10,6 +10,7 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
 var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
+var stripe = require('stripe')
 
 
 app.use(bodyParser.json({limit: '200mb'}))
@@ -58,6 +59,8 @@ app.post('/upload', function(req, res) {
 	})
 })
 
+var CURRENT_USER_ID = null
+
 app.post('/submitprofile', function(req, res) {
 	var data = req.body
 	var address = data.gymAddress
@@ -89,6 +92,7 @@ app.post('/submitprofile', function(req, res) {
 			res.send(err)
 		} else {
 			console.log(user._id)
+			CURRENT_USER_ID = user._id
 			res.send(user._id)
 		}
 	})
@@ -138,6 +142,7 @@ app.post('/checkin', function(req, res) {
 var STRIPE_TOKEN_URI = "https://connect.stripe.com/oauth/token"
 var STRIPE_CLIENT_ID = "ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo"
 var STRIPE_CLIENT_SECRET = "sk_test_w3e7ceV8H7W58BRqHnyv8rxz"
+var STRIPE_TEST_DESTINATION = "cus_9QNfmWnoHlLo4Y"
 
 app.get('/stripeURI', function(req, res) {
 	var auth_code = req.query.code
@@ -147,7 +152,6 @@ app.get('/stripeURI', function(req, res) {
 	}
 
 	// If the flow reaches this stage, we know that we have the auth_code
-
 	request.post({
 		url: STRIPE_TOKEN_URI,
 		form: {
@@ -158,9 +162,15 @@ app.get('/stripeURI', function(req, res) {
 		}
 	}, function(err, response, body) {
 		var accessToken = JSON.parse(body).access_token
-
+		var stripeUserId = JSON.parse(body).stripe_user_id
 		console.log(accessToken)
-		console.log(JSON.parse(body))
+		console.log(stripeUserId)
+
+		stripe.charges.create({
+			amount: 5,
+			currency: 'cad',
+			source: {accessToken}
+		}, { stripe_account: {STRIPE_TEST_DESTINATION} })
 		res.send(accessToken)
 	})
 })

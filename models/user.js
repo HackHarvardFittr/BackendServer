@@ -13,7 +13,9 @@ var UserSchema = new mongoose.Schema({
 	partner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	likers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 	dailyPoints: { type: Number, default: 0 },
-	dailySteps: { type: Number, default: 0 }  
+	dailySteps: { type: Number, default: 0 },
+	stripeUserId: String,
+	stripeAccessToken: String  
 })
 
 var User = mongoose.model('User', UserSchema)
