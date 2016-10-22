@@ -36,18 +36,21 @@ app.post('/upload', function(req, res) {
 
 app.post('/submitprofile', function(req, res) {
 	var data = req.body
-	var address = "317 Valeria Blvd, Vaughan, ON"
+	var address = req.body.gymAddress
 	address.split(' ').join('+')
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, res, body) {
 		console.log(typeof body)
 		var response = JSON.parse(body)
-		console.log(response.results.geometry)
+		console.log("Latitude: " + response["results"][0]["geometry"]["location"]["lat"])
+		console.log("Longitude: " + response["results"][0]["geometry"]["location"]["lng"])
 	})	
 	console.log(data)
 	res.send("Received request")
 })
 
 app.listen(4900)
+var address = "317 Valeria Blvd, Vaughan, ON"
+
 
 console.log("Backend server is running!")
