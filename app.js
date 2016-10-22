@@ -31,7 +31,6 @@ app.post('/upload', function(req, res) {
 	cloudinary.uploader.upload('uploads/image.png', function(result) {
 		console.log(result.url)
 	})
-
 })
 
 app.post('/submitprofile', function(req, res) {
@@ -50,7 +49,4 @@ app.post('/submitprofile', function(req, res) {
 })
 
 app.listen(4900)
-var address = "317 Valeria Blvd, Vaughan, ON"
-
-
 console.log("Backend server is running!")
