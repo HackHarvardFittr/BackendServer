@@ -29,18 +29,19 @@ app.post('/upload', function(req, res) {
 	fs.writeFile('uploads/image.png', buf)
 	res.send("File received!")
 	cloudinary.uploader.upload('uploads/image.png', function(result) {
-		console.log(result)
+		console.log(result.url)
 	})
-	var address = "200 University Avenue, Waterloo, ON"
-	address.split(' ').join('+')
-	var APIcall = googleMapsAPI+address+googleMapsAPIKey
-	request(APIcall, function(err, res, body) {
-		console.log(body.results.geometry.location)
-	})
+
 })
 
 app.post('/submitprofile', function(req, res) {
 	var data = req.body
+	var address = req.body.gymAddress
+	address.split(' ').join('+')
+	var APIcall = googleMapsAPI+address+googleMapsAPIKey
+	request(APIcall, function(err, res, body) {
+		console.log(body.results.geometry.location)
+	})	
 	console.log(data)
 	res.send("Received request")
 })
