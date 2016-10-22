@@ -35,7 +35,7 @@ app.post('/upload', function(req, res) {
 	res.send("File received!")
 	cloudinary.uploader.upload('uploads/image.png', function(result) {
 		imageURL = result.url
-		console.log(imageUrl)
+		console.log(imageURL)
 	})
 })
 
