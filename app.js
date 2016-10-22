@@ -6,6 +6,9 @@ var upload = multer({ dest : 'uploads/'})
 var cloudinary = require('cloudinary')
 var fs = require('fs')
 var bodyParser = require('body-parser')
+var request = require('request')
+var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
+var googleMapsAPIKey = "&key=AIzaSyDK_CydX-pzV5HcHLNJPYV4JGdqBnoM7sM" 
 
 app.use(bodyParser.json({limit: '200mb'}))
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true}))
@@ -25,6 +28,12 @@ app.post('/upload', function(req, res) {
 	res.send("File received!")
 	cloudinary.uploader.upload('uploads/image.png', function(result) {
 		console.log(result)
+	})
+	var address = "200 University Avenue, Waterloo, ON"
+	address.split(' ').join('+')
+	var APIcall = googleMapsAPI+address+googleMapsAPIKey
+	request(APIcall, function(err, res, body) {
+		console.log(body)
 	})
 })
 

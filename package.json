@@ -20,7 +20,8 @@
     "cloudinary": "^1.4.3",
     "express": "^4.14.0",
     "mongoose": "^4.6.4",
-    "multer": "^1.2.0"
+    "multer": "^1.2.0",
+    "request": "^2.75.0"
   },
   "devDependencies": {}
 }
