@@ -95,9 +95,9 @@ app.post('/submitprofile', function(req, res) {
 				if (err) {
 					console.log(err)
 				} else {
-					user.partner = p._id
+					user.partner = p
 					user.save()
-					p.partner = user._id
+					p.partner = user
 					p.save()
 					console.log(String(user._id))
 					CURRENT_USER_ID = user._id
@@ -132,8 +132,8 @@ app.post('/stats', function(req, res) {
 				"dailyPoints": user.partner.dailyPoints,
 				"dailySteps": user.partner.dailySteps,
 				"goneToday": user.partner.goneToday,
-				"imageURL": user.imageURL,
-				"name" : user.name
+				"imageURL": user.partner.imageURL,
+				"name" : user.partner.name
 			}
 			console.log(oppJSON)
 			res.json({"user": userJSON, "opponent": oppJSON})
