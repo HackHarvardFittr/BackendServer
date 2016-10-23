@@ -135,7 +135,7 @@ app.post('/stats', function(req, res) {
 				"imageURL": part.imageURL,
 				"name" : part.name
 			}
-			console.log(oppJSON)
+			console.log({"user": userJSON, "opponent": oppJSON})
 			res.json({"user": userJSON, "opponent": oppJSON})
 			})	
 		}
