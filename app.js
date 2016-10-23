@@ -100,6 +100,40 @@ app.post('/submitprofile', function(req, res) {
 
 })
 
+app.post('/like', function(req, res) {
+	var userid = req.body.userid
+	var likeid = req.body.likeid
+	var alreadyLikes = false
+	User.findById(userid, function(err, user) {
+		var likers = user.likers
+		for (var i = 0; i < likers.length; ++i) {
+			// If the liked user already likes the user
+			if (likers[i] === likeid) {
+				alreadyLikes = true
+			}
+		}
+		if (alreadyLikes) {
+			// TODO: Match found!!
+			User.findById(likeid, function(err, likedUser) {
+				likedUser.partner = String(userid)
+				likedUser.save()
+				user.partner = String(likeid)
+				user.save()
+				res.send("value": "true")
+			})
+		} else {
+			User.findById(likeid, function(err, likedUser) {
+				likedUser.likers.push(userid);
+				likedUser.save()
+				res.send({"value": "false"})
+			})
+		}
+	})
+	// User.findById(likeid, function(err, user) {
+	// 	user.likers.push(userid)
+	// })
+})
+
 app.post('/stats', function(req, res) {
 	userid = req.body.userid
 	console.log("In stats")
@@ -234,7 +268,8 @@ app.post('/populate', function(req, res) {
 				"weight": usr.weight,
 				"favouriteWorkout": usr.favouriteWorkout,
 				"imageURL": usr.imageURL,
-				"name": usr.name
+				"name": usr.name,
+				"userid": String(usr._id)
 			}
 		})
 		res.json(UsersToBeSent)
