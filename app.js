@@ -101,6 +101,7 @@ app.post('/submitprofile', function(req, res) {
 })
 
 app.post('/like', function(req, res) {
+	console.log("Req received")
 	var userid = req.body.userid
 	var likeid = req.body.likeid
 	var alreadyLikes = false
