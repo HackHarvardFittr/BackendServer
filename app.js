@@ -118,12 +118,15 @@ app.post('/checkin', function(req, res) {
 			lat2 = user.latitude
 			lon2 = user.longitude
 		}
+		console.log(lat2)
+		console.log(lon2)
 		distance = euclideanDistance(lat, lon, lat2, lon2)
+		console.log(distance)
 		if (distance < 2) {
 			checkinValid = true
 		}
 		if (!checkinValid) {
-			res.send("false")
+			res.json({"value" : "false"})
 		}
 		else {
 			// Now we compare the dates 
@@ -134,7 +137,7 @@ app.post('/checkin', function(req, res) {
 				user.dailyPoints += 10
 				user.save()
 			}
-			res.send("true")
+			res.json({"value" : "true"})
 		}
 	})
 })
