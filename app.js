@@ -184,7 +184,7 @@ app.post('/stats', function(req, res) {
 		} else {
 			var userJSON = {
 				"dailySteps": String(user.dailySteps),
-				"dailyPoints": String(user.dailyPoints),
+				"dailyPoints": user.dailyPoints,
 				"goneToday": user.goneToday,
 				"imageURL": user.imageURL,
 				"name": user.name
@@ -197,7 +197,7 @@ app.post('/stats', function(req, res) {
 				}
 				var oppJSON = {
 				"dailyPoints": String(part.dailyPoints),
-				"dailySteps": String(part.dailySteps),
+				"dailySteps": part.dailySteps,
 				"goneToday": part.goneToday,
 				"imageURL": part.imageURL,
 				"name" : part.name
