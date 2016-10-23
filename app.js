@@ -69,13 +69,15 @@ app.post('/submitprofile', function(req, res) {
 	var data = req.body
 	var address = data.gymAddress
 	address.split(' ').join('+')
-	var latitude = 0
-	var longitude = 0
+	var latitude = 42
+	var longitude = -71
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
 	request(APIcall, function(err, resp, body) {
 		var response = JSON.parse(body)
-		latitude = parseFloat(response["results"][0]["geometry"]["location"]["lat"])
-		longitude = parseFloat(response["results"][0]["geometry"]["location"]["lng"])
+		if (response["results"] && response["results"][0] && response["results"][0]["geometry"]) {
+			latitude = parseFloat(response["results"][0]["geometry"]["location"]["lat"])
+			longitude = parseFloat(response["results"][0]["geometry"]["location"]["lng"])			
+		}
 		var gymAddress = data.gymAddress
 		var name = data.name
 		var favouriteWorkout = data.favouriteWorkout
