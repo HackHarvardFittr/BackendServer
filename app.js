@@ -266,7 +266,7 @@ app.post('/populate', function(req, res) {
 	User.find({}, function(err, allUsers) {
 		var UsersToBeSent = allUsers.filter(function(usr) {
 			console.log(euclideanDistance(usr.latitude, usr.longitude, lat1, lon1))
-			return (String(userid) !== String(usr._id) && euclideanDistance(usr.latitude, usr.longitude, lat1, lon1) <= 50)
+			return (String(userid) !== String(usr._id) && euclideanDistance(usr.latitude, usr.longitude, lat1, lon1) <= 10000)
 		})
 		.map(function(usr) {
 			return {
