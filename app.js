@@ -72,31 +72,32 @@ app.post('/submitprofile', function(req, res) {
 		var response = JSON.parse(body)
 		latitude = parseFloat(response["results"][0]["geometry"]["location"]["lat"])
 		longitude = parseFloat(response["results"][0]["geometry"]["location"]["lng"])
-	})	
-	var gymAddress = data.gymAddress
-	var name = data.name
-	var favouriteWorkout = data.favouriteWorkout
-	var weight = data.weight
+		var gymAddress = data.gymAddress
+		var name = data.name
+		var favouriteWorkout = data.favouriteWorkout
+		var weight = data.weight
 
-	var newUser = {
+		var newUser = {
 		name: name,
 		favouriteWorkout: favouriteWorkout,
 		weight: weight,
 		imageURL: imageURL,
 		latitude: latitude,
 		longitude: longitude
-	}
-	console.log(newUser)
-	User.create(newUser, function(err, user) {
-		if (err) {
-			console.log(err)
-			res.send(err)
-		} else {
-			console.log(String(user._id))
-			CURRENT_USER_ID = user._id
-			res.json({"userid": String(user._id)})
 		}
-	})
+		console.log(newUser)
+		User.create(newUser, function(err, user) {
+		if (err) {
+		console.log(err)
+		res.send(err)
+		} else {
+		console.log(String(user._id))
+		CURRENT_USER_ID = user._id
+		res.json({"userid": String(user._id)})
+		}
+		})
+	})	
+
 })
 
 app.post('/checkin', function(req, res) {
