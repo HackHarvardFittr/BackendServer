@@ -91,9 +91,20 @@ app.post('/submitprofile', function(req, res) {
 		console.log(err)
 		res.send(err)
 		} else {
-		console.log(String(user._id))
-		CURRENT_USER_ID = user._id
-		res.json({"userid": String(user._id)})
+			User.create(newUser, function(err, p) {
+				if (err) {
+					console.log(err)
+				} else {
+					user.partner = p
+					user.save()
+					p.partnet = user
+					p.save()
+					console.log(String(user._id))
+					CURRENT_USER_ID = user._id
+					res.json({"userid": String(user._id)})
+				}
+			})
+
 		}
 	})
 })	
