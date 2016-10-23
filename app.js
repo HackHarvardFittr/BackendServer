@@ -191,7 +191,7 @@ app.post('/stats', function(req, res) {
 			}
 			console.log(user)
 			User.findById(user.partner).exec(function(err, part) {
-				if (err) {
+				if (err || !part) {
 					res.json({"error":"true", "user": userJSON})
 					return
 				}
