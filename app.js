@@ -97,7 +97,7 @@ app.post('/submitprofile', function(req, res) {
 				} else {
 					user.partner = p
 					user.save()
-					p.partnet = user
+					p.partner = user
 					p.save()
 					console.log(String(user._id))
 					CURRENT_USER_ID = user._id
