@@ -138,6 +138,7 @@ app.post('/stats', function(req, res) {
 				"imageURL": user.imageURL,
 				"name" : user.name
 			}
+			console.log(oppJSON)
 			res.json({"user": userJSON, "opponent": oppJSON})
 		}
 	})
