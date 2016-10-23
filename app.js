@@ -118,6 +118,7 @@ app.post('/like', function(req, res) {
 			// TODO: Match found!!
 			User.findById(likeid, function(err, likedUser) {
 				likedUser.partner = String(userid)
+				likedUser.likers.push(String(userid))
 				likedUser.save()
 				user.partner = String(likeid)
 				user.save()
