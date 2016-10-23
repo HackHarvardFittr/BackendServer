@@ -68,7 +68,7 @@ app.post('/submitprofile', function(req, res) {
 	var latitude = 0
 	var longitude = 0
 	var APIcall = googleMapsAPI+address+googleMapsAPIKey
-	request(APIcall, function(err, res, body) {
+	request(APIcall, function(err, resp, body) {
 		var response = JSON.parse(body)
 		latitude = parseFloat(response["results"][0]["geometry"]["location"]["lat"])
 		longitude = parseFloat(response["results"][0]["geometry"]["location"]["lng"])
@@ -95,8 +95,8 @@ app.post('/submitprofile', function(req, res) {
 		CURRENT_USER_ID = user._id
 		res.json({"userid": String(user._id)})
 		}
-		})
-	})	
+	})
+})	
 
 })
 
