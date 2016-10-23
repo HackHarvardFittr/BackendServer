@@ -109,6 +109,7 @@ app.post('/appstart', function(req, res) {
 	var userid = req.body.userid
 	var pedometer = req.body.pedometer
 
+	console.log(pedometer)
 	var today = new Date()
 	User.findById(userid, function(err, user) {
 		if (err) {
