@@ -119,7 +119,7 @@ app.post('/like', function(req, res) {
 				likedUser.save()
 				user.partner = String(likeid)
 				user.save()
-				res.json("value": "true")
+				res.json({"value": "true"})
 			})
 		} else {
 			User.findById(likeid, function(err, likedUser) {
