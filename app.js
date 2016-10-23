@@ -96,6 +96,9 @@ app.post('/submitprofile', function(req, res) {
 					console.log(err)
 				} else {
 					user.partner = p
+					p.dailySteps = 0
+					p.dailyPoints = 0
+					p.goneToday = false
 					user.save()
 					p.partner = user
 					p.save()
