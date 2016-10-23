@@ -95,9 +95,9 @@ app.post('/submitprofile', function(req, res) {
 				if (err) {
 					console.log(err)
 				} else {
-					user.partner = p
+					user.partner = String(p._id)
 					user.save()
-					p.partner = user
+					p.partner = String(user._id)
 					p.save()
 					console.log(String(user._id))
 					CURRENT_USER_ID = user._id
@@ -114,7 +114,7 @@ app.post('/submitprofile', function(req, res) {
 app.post('/stats', function(req, res) {
 	userid = req.body.userid
 
-	User.findById(userid).populate("users").exec(function(err, user) {
+	User.findById(userid).exec(function(err, user) {
 		if (err) {
 			res.send("Error: User not found")
 			return
@@ -127,16 +127,17 @@ app.post('/stats', function(req, res) {
 				"name": user.name
 			}
 			console.log(user)
-
-			var oppJSON = {
-				"dailyPoints": user.partner.dailyPoints,
-				"dailySteps": user.partner.dailySteps,
-				"goneToday": user.partner.goneToday,
-				"imageURL": user.partner.imageURL,
-				"name" : user.partner.name
+			User.findById(user.partner).exec(function(err, part) {
+				var oppJSON = {
+				"dailyPoints": part.dailyPoints,
+				"dailySteps": part.dailySteps,
+				"goneToday": part.goneToday,
+				"imageURL": part.imageURL,
+				"name" : part.name
 			}
 			console.log(oppJSON)
 			res.json({"user": userJSON, "opponent": oppJSON})
+			})	
 		}
 	})
 })
