@@ -104,6 +104,7 @@ app.post('/like', function(req, res) {
 	console.log("Req received")
 	var userid = req.body.userid
 	var likeid = req.body.likeid
+	console.log(likeid)
 	var alreadyLikes = false
 	User.findById(userid, function(err, user) {
 		var likers = user.likers
