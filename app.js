@@ -115,6 +115,8 @@ app.post('/stats', function(req, res) {
 				"imageURL": user.imageURL,
 				"name": user.name
 			}
+			console.log(user)
+
 			var oppJSON = {
 				"dailyPoints": user.partner.dailyPoints,
 				"dailySteps": user.partner.dailySteps,
