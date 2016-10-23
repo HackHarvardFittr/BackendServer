@@ -179,7 +179,7 @@ app.post('/stats', function(req, res) {
 	console.log(userid)
 	User.findById(userid).exec(function(err, user) {
 		if (err) {
-			res.send("Error: User not found")
+			res.json({"error":"true"})
 			return
 		} else {
 			var userJSON = {
@@ -192,7 +192,7 @@ app.post('/stats', function(req, res) {
 			console.log(user)
 			User.findById(user.partner).exec(function(err, part) {
 				if (err) {
-					res.json({"value":"false", "user": userJSON})
+					res.json({"error":"true", "user": userJSON})
 					return
 				}
 				var oppJSON = {
@@ -203,7 +203,7 @@ app.post('/stats', function(req, res) {
 				"name" : part.name
 			}
 			console.log({"user": userJSON, "opponent": oppJSON})
-			res.json({"user": userJSON, "opponent": oppJSON, "value" :"true"})
+			res.json({"user": userJSON, "opponent": oppJSON, "error" :"false"})
 			})	
 		}
 	})
