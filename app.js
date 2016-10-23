@@ -95,12 +95,12 @@ app.post('/submitprofile', function(req, res) {
 				if (err) {
 					console.log(err)
 				} else {
-					user.partner = p
+					user.partner = p._id
 					p.dailySteps = 0
 					p.dailyPoints = 0
 					p.goneToday = false
 					user.save()
-					p.partner = user
+					p.partner = user._id
 					p.save()
 					console.log(String(user._id))
 					CURRENT_USER_ID = user._id
