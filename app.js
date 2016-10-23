@@ -152,6 +152,10 @@ app.post('/stats', function(req, res) {
 			}
 			console.log(user)
 			User.findById(user.partner).exec(function(err, part) {
+				if (err) {
+					res.json({"value":"false", "user": userJSON})
+					return
+				}
 				var oppJSON = {
 				"dailyPoints": part.dailyPoints,
 				"dailySteps": part.dailySteps,
@@ -160,7 +164,7 @@ app.post('/stats', function(req, res) {
 				"name" : part.name
 			}
 			console.log({"user": userJSON, "opponent": oppJSON})
-			res.json({"user": userJSON, "opponent": oppJSON})
+			res.json({"user": userJSON, "opponent": oppJSON, "value" :"true"})
 			})	
 		}
 	})
