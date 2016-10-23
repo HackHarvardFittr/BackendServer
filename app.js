@@ -108,9 +108,11 @@ app.post('/checkin', function(req, res) {
 	var distance = 99999
 	var checkinValid = false
 	userid = req.body.userid
+	console.log(userid)
 	User.findById(userid).exec(function(err, user) {
 		if (err) {
 			res.send("Error: User not found!")
+			return
 		}
 		else {
 			lat2 = user.latitude
