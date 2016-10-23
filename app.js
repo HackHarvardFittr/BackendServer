@@ -113,7 +113,8 @@ app.post('/submitprofile', function(req, res) {
 
 app.post('/stats', function(req, res) {
 	userid = req.body.userid
-
+	console.log("In stats")
+	console.log(userid)
 	User.findById(userid).exec(function(err, user) {
 		if (err) {
 			res.send("Error: User not found")
