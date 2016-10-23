@@ -127,7 +127,7 @@ app.post('/appstart', function(req, res) {
 			user.dailyPoints += numPointsDueToSteps
 			user.dailySteps = pedometer
 			user.goneToday = false
-			user.checkinDate today
+			user.checkinDate = today
 			user.save()
 		}
 	})
