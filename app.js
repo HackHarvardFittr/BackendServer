@@ -100,6 +100,33 @@ app.post('/submitprofile', function(req, res) {
 
 })
 
+app.post('/stats', function(req, res) {
+	userid = req.body.userid
+
+	User.findById(userid).populate("users").exec(function(err, user) {
+		if (err) {
+			res.send("Error: User not found")
+			return
+		} else {
+			var userJSON = {
+				"dailySteps": user.dailySteps,
+				"dailyPoints": user.dailyPoints,
+				"goneToday": user.goneToday,
+				"imageURL": user.imageURL,
+				"name": user.name
+			}
+			var oppJSON = {
+				"dailyPoints": user.partner.dailyPoints,
+				"dailySteps": user.partner.dailySteps,
+				"goneToday": user.partner.goneToday,
+				"imageURL": user.imageURL,
+				"name" : user.name
+			}
+			res.json({"user": userJSON, "opponent": oppJSON})
+		}
+	})
+})
+
 app.post('/checkin', function(req, res) {
 	var lat = parseFloat(req.body.latitude)
 	var lon = parseFloat(req.body.longitude)
