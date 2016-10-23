@@ -183,8 +183,8 @@ app.post('/stats', function(req, res) {
 			return
 		} else {
 			var userJSON = {
-				"dailySteps": String(user.dailySteps),
-				"dailyPoints": user.dailyPoints,
+				"dailySteps": user.dailySteps,
+				"dailyPoints": String(user.dailyPoints),
 				"goneToday": user.goneToday,
 				"imageURL": user.imageURL,
 				"name": user.name
