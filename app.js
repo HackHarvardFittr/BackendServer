@@ -34,6 +34,10 @@ cloudinary.config({
   	api_secret: 'TpBrLwl_nATkBZQSzws94mtS9fA' 
 })
 
+var isSameDay = function(date1, date2) {
+	return (date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate() && date1.getYear() == date2.getYear()) 
+}
+
 var euclideanDistance = function(lat1, lon1, lat2, lon2) {
 	var R = 6371; // Radius of the earth in km
 	var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
@@ -97,6 +101,33 @@ app.post('/submitprofile', function(req, res) {
 		}
 	})
 })	
+
+})
+
+app.post('/appstart', function(req, res) {
+	console.log("App start endpoint triggered")
+	var userid = req.body.userid
+	var pedometer = req.body.pedometer
+
+	var today = new Date()
+	User.findById(userid, function(err, user) {
+		if (err) {
+			console.log("DB error: User not found")
+			return
+		}
+		if (isSameDay(today, user.checkinDate)) {
+			console.log("Same day, no change")
+			return
+		}
+		else {
+			console.log("Accounting for change")
+			var numSteps = user.dailySteps
+			var numPointsDueToSteps = parseInt(((pedometer - numSteps)/1000) * 2)
+			user.dailyPoints += numPointsDueToSteps
+			user.dailySteps = pedometer
+			user.goneToday = false
+		}
+	})
 
 })
 
