@@ -91,20 +91,9 @@ app.post('/submitprofile', function(req, res) {
 		console.log(err)
 		res.send(err)
 		} else {
-			User.create(newUser, function(err, p) {
-				if (err) {
-					console.log(err)
-				} else {
-					user.partner = String(p._id)
-					user.save()
-					p.partner = String(user._id)
-					p.save()
-					console.log(String(user._id))
-					CURRENT_USER_ID = user._id
-					res.json({"userid": String(user._id)})
-				}
-			})
-
+			console.log(String(user._id))
+			CURRENT_USER_ID = user._id
+			res.json({"userid": String(user._id)})
 		}
 	})
 })	
@@ -233,14 +222,45 @@ app.get('/stripeURI', function(req, res) {
 app.post('/populate', function(req, res) {
 	var lat1 = parseFloat(req.body.latitude)
 	var lon1 = parseFloat(req.body.longitude)
-	var lat2 = 0 
-	var lon2 = 0
-
-	var distance = 9999
 	userid = req.body.userid
-	Users.findById(userid).exec(function(err, user) {
-		if (err) res.send("Error: User not found!")	
+
+	User.find({}, function(err, allUsers) {
+		var UsersToBeSent = allUsers.filter(function(usr) {
+			return (String(userid) !== String(usr._id) && euclideanDistance(usr.latitude, usr.longitude, lat1, lon1) <= 10)
+		})
+		.map(function(usr) {
+			return {
+				"weight": usr.weight,
+				"favouriteWorkout": usr.favouriteWorkout,
+				"imageURL": usr.imageURL,
+				"name": usr.name
+			}
+		})
+		res.json(UsersToBeSent)
 	})
+
+	// User.findById(userid).exec(function(err, user) {
+	// 	if (err) res.send("Error: User not found!")	
+	// 	else {
+	// 		var lat2 = user.latitude
+	// 		var lon2 = user.longitude
+	// 		distance = euclideanDistance(lat1, lon1, lat2, lon2) 
+	// 	}
+	// 	User.find({}, function(err, allUsers) {
+	// 		var UsersToBeSent = allUsers.filter(function(usr) {
+	// 			return (String(userid) !== String(usr._id) || )
+	// 		})
+	// 		.map(function(usr) {
+	// 			return {
+	// 				weight: usr.weight,
+	// 				favouriteWorkout: usr.favouriteWorkout,
+	// 				imageURL: usr.imageURL,
+	// 				name: usr.name
+	// 			}
+	// 		})
+	// 		res.json(UsersToBeSent)
+	// 	})
+	// })
 })
 
 app.listen(4900)
