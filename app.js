@@ -86,6 +86,7 @@ app.post('/submitprofile', function(req, res) {
 		latitude: latitude,
 		longitude: longitude
 	}
+	console.log(newUser)
 	User.create(newUser, function(err, user) {
 		if (err) {
 			console.log(err)
