@@ -252,11 +252,9 @@ app.post('/checkin', function(req, res) {
 	})
 })
 
-// Stripe Client ID: ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo
 // Redirect URI Stripe: http://35.161.109.99:4900/stripeURI
 
-// Link for the 'Connect' button: https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo&scope=read_write
-// Test secret key: sk_test_w3e7ceV8H7W58BRqHnyv8rxz
+// Link for the 'Connect' button: https://connect.stripe.com/oauth/authorize?response_type=code&client_id=asdasdasddasdasda&scope=read_write
 var STRIPE_TOKEN_URI = "https://connect.stripe.com/oauth/token"
 var STRIPE_CLIENT_ID = "csdfsdgdgdsfgo"
 var STRIPE_CLIENT_SECRET = "psdfgdsgsdfgds"
