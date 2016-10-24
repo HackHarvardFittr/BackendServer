@@ -1,2 +1,2 @@
 # BackendServer
-Backend services and API endpoints in Node and Mongo
+Backend services and API endpoints in Node and Mongo for Fittr. 
