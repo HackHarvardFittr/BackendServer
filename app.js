@@ -9,8 +9,8 @@ var User = require('./models/user')
 var bodyParser = require('body-parser')
 var request = require('request')
 var googleMapsAPI = "https://maps.googleapis.com/maps/api/geocode/json?address="
-var googleMapsAPIKey = "&key=AIzaSyDJ7vGimagndloKzQHMoCMSype8wbMau0Y" 
-var stripe = require('stripe')("pk_test_JKdI5RMl6j8G0v5oARcNdKCj")
+var googleMapsAPIKey = "&keydsfgdsgsdfgsdgfsdfgu0Y" 
+var stripe = require('stripe')("pdfsgssdfgsdfgsdgsdgfsdgsdgfj")
 
 
 app.use(bodyParser.json({limit: '200mb'}))
@@ -30,9 +30,8 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 
 cloudinary.config({ 
   	cloud_name: 'aayushshah', 
-  	api_key: '736295731869694', 
-  	api_secret: 'TpBrLwl_nATkBZQSzws94mtS9fA' 
-})
+  	api_key: '7dfgsdgsdgfsdg4', 
+  	api_secret: 'TpBrLdfsgfsdgsdgfsdgsdgf'
 
 var isSameDay = function(date1, date2) {
 	return (date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate() && date1.getYear() == date2.getYear()) 
@@ -259,9 +258,9 @@ app.post('/checkin', function(req, res) {
 // Link for the 'Connect' button: https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo&scope=read_write
 // Test secret key: sk_test_w3e7ceV8H7W58BRqHnyv8rxz
 var STRIPE_TOKEN_URI = "https://connect.stripe.com/oauth/token"
-var STRIPE_CLIENT_ID = "ca_9QLjFhvhlqE96OcOzl0E7G0DqPhosLOo"
-var STRIPE_CLIENT_SECRET = "pk_test_JKdI5RMl6j8G0v5oARcNdKCj"
-var STRIPE_TEST_DESTINATION = "cus_9QNfmWnoHlLo4Y"
+var STRIPE_CLIENT_ID = "csdfsdgdgdsfgo"
+var STRIPE_CLIENT_SECRET = "psdfgdsgsdfgds"
+var STRIPE_TEST_DESTINATION = "cufgdsgdsgsdgsdfg"
 
 app.get('/stripeURI', function(req, res) {
 	var auth_code = req.query.code
